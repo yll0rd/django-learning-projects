@@ -2,12 +2,10 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
-from django.http import JsonResponse
-import json
 
 # Create your views here.
 class UserListView(APIView):
@@ -18,7 +16,7 @@ class UserListView(APIView):
         listOfCredentials = dict()
         i = 1
         for u in user:
-            listOfCredentials[i] = {'username': u.username, 'email': u.email, 'password': u.password}
+            listOfCredentials[u.id] = {'username': u.username, 'email': u.email, 'password': u.password}
             i += 1
         print(str(listOfCredentials))
         return Response(listOfCredentials)
@@ -50,7 +48,6 @@ class LoginView(APIView):
         email = request.data.get('email')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
             token, created = Token.objects.get_or_create(user=user)
             return Response({'token': token.key})
         else:
@@ -62,5 +59,4 @@ class LogoutView(APIView):
 
     def post(self, request):
         Token.objects.filter(user=request.user).delete()
-        logout(request)
         return Response({'message': 'Logged out successfully'})
