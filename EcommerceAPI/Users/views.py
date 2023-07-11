@@ -21,7 +21,7 @@ class UserListView(APIView):
         print(str(listOfCredentials))
         return Response(listOfCredentials)
 
-class RegisterView(APIView):
+class RegisterSimpleView(APIView):
     def post(self, request, format=None):
         username = request.data.get('username')
         password = request.data.get('password')
@@ -40,6 +40,23 @@ class RegisterView(APIView):
         # User.objects.all().delete()
         # Token.objects.all().delete()
         # return Response("deleted")
+
+class RegisterAdminView(APIView):
+    def post(self, request, format=None):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        email = request.data.get('email')
+        
+        if not username or not password or not email:
+            return Response({'error': 'Please provide all required fields'})
+        try:
+            user = User.objects.create_superuser(username=username, password=password, email=email)
+        except Exception as e:
+            return Response({'error': str(e)})
+        if user:
+            token, created = Token.objects.get_or_create(user=user)
+            print(user.username)
+            return Response({'token': str(token), 'created': created})
 
 class LoginView(APIView):
     def post(self, request):
