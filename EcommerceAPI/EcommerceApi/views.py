@@ -44,7 +44,7 @@ class CartView(APIView):
         return JsonResponse({'status': 'success'}, status=status.HTTP_200_OK)
 
     def delete(self, request):
-            order_id = request.data.get('order_id')
-            item_id = request.data.get('item_id')
-            order_item = get_object_or_404(OrderItem, order__id=order_id, item__id=item_id, order__users=request.user)
-            order_item.delete()
+        order_id = request.data.get('order_id')
+        item_id = request.data.get('item_id')
+        order_item = get_object_or_404(OrderItem, order__id=order_id, item__id=item_id, order__users=request.user)
+        order_item.delete()
