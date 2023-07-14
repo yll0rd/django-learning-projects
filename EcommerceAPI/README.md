@@ -1,8 +1,8 @@
 # Ecommerce API
 
-This is an API for an ecommerce platform that allows customers to browse products, add items to their cart, and check out their orders. The API is built using the Django Rest Framework and includes endpoints for managing user accounts, products, orders, and payments.
-Getting Started
+This is an API for an ecommerce platform that allows customers to browse products, add items to their cart, and check out their orders. The API is built using the Django Rest Framework and includes endpoints for managing user accounts, products, orders, and payments.  
 
+## Getting Started
 To get started with the Ecommerce API, you will need to have Python 3.8 or higher installed on your system. You will also need to install the required Python packages by running the following command:
 
 `pip install -r requirements.txt`
@@ -71,7 +71,7 @@ The Ecommerce API returns error responses with appropriate HTTP status codes and
 
 This project uses environment variables to store sensitive information, such as database credentials and secret keys. These variables are stored in an `.env` file in the root directory of the project.
 
-To set up the environment variables, you should create a copy of the `.env`.example file and rename it to `.env`. Then, open the file and replace the placeholder values with your own values.
+To set up the environment variables, you should create a copy of the `.env.example` file and rename it to `.env`. Then, open the file and replace the placeholder values with your own values.
 
 ```
 cp .env.example .env
