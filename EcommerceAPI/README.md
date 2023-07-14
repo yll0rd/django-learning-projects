@@ -1,6 +1,6 @@
 # Ecommerce API
 
-This is an API for an ecommerce platform that allows customers to browse products, add items to their cart, and check out their orders. The API is built using the Django Rest Framework and includes endpoints for managing user accounts, products, orders, and payments.  
+This is an API for an ecommerce platform that allows customers to browse products, add items to their cart, and check out their orders. The API is built using the `Django Rest Framework` and includes endpoints for managing user accounts, products, orders, and payments.  
 
 ## Getting Started
 To get started with the Ecommerce API, you will need to have Python 3.8 or higher installed on your system. You will also need to install the required Python packages by running the following command:
