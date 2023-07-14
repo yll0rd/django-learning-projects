@@ -3,12 +3,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
 
 # Create your views here.
 class UserListView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAdminUser, IsAuthenticated]
     def get(self, request, format=None):
         # usernames = [user.username for user in User.objects.all()]
         # return Response(usernames)
@@ -20,6 +22,32 @@ class UserListView(APIView):
             i += 1
         print(str(listOfCredentials))
         return Response(listOfCredentials)
+    
+    def put(self, request):
+        username = request.data.get('username', request.user.username)
+        password = request.data.get('password', request.user.password)
+        email = request.data.get('email', request.user.email)
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return Response({'error': f"User {username} do not exist OR wrong credentials"})
+        user.username = username
+        user.password = password
+        user.email= email
+        user.save()
+        return Response({'success': "The details were updated"})
+
+    def delete(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        email = request.data.get('email')
+        try:
+            user = User.objects.get(username=username, password=password)
+        except User.DoesNotExist:
+            return Response({'error': f"User {username} do not exist OR wrong credentials"})
+        Token.objects.get(user=user).delete()
+        user.delete()
+        return Response({'Success': f"User {username} was deleted"})
 
 class RegisterSimpleView(APIView):
     def post(self, request, format=None):
