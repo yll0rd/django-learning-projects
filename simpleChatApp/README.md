@@ -14,19 +14,19 @@ This is a simple ChatApp project built with Django, allowing users to create cha
 2. Move into the correct folder  
 `cd starting-with-Django/simpleChatApp`
 
-2. Install dependencies  
-`pip install -r requirements.txt`  
+3. Install dependencies  
+`pip3 install -r requirements.txt`  
 
-3. Copy the .env.example file to .env and fill in the values.  
+4. Copy the .env.example file to .env and fill in the values.  
 `cp .env.example .env`  
 
-4. Apply database migrations  
-`python manage.py migrate`  
+5. Apply database migrations  
+`python3 manage.py migrate`  
 
-5. Run the server  
-`python manage.py runserver`  
+6. Run the server  
+`python3 manage.py runserver`  
 
-6. Access the app by navigating to http://localhost:8000 ↗ in your web browser.  
+7. Access the app by navigating to http://localhost:8000 ↗ in your web browser.  
 
 ## Usage
 1. Register for an account or log in if you already have one
