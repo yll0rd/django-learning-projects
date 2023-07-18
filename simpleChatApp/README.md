@@ -11,6 +11,9 @@ This is a simple ChatApp project built with Django, allowing users to create cha
 1. Clone the repository  
 `git clone https://github.com/Leo-Youmbi/starting-with-Django`  
 
+2. Move into the correct folder  
+`cd starting-with-Django/simpleChatApp`
+
 2. Install dependencies  
 `pip install -r requirements.txt`  
 
